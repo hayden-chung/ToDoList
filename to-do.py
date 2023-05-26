@@ -36,26 +36,53 @@ class ToDoListFunctions():
         print('=' * 15)
 
     def mark_completed(self, task_id):
+        try: 
+            task_id < len(self.items)
+        except IndexError:
+            print('this is invalid') 
         self.items[task_id-1].completed = True
 
     def remove_task(self, task_id):
         self.items.pop(task_id-1)
 
-class ToDoApp():
-    def __init__(self, name='defalt todo'):
-        self.todolists = [] # multiple to-do list
-        
-def print_commands():
-    pass
 
+
+class ToDoApp():
+    def __init__(self):
+        self.todolists = ToDoListFunctions('test')
+
+    def run(self):
+        cmd = input('enter your command (add, view, completed, remove)')
+        if cmd == 'add':
+            self.todolists.add_task(input('New task:'))
+        if cmd == 'view':
+            self.todolists.view_tasks()
+        if cmd == 'completed':
+            self.todolists.mark_completed(int(input('task number:')))
+        if cmd == 'remove':
+            self.todolists.remove_task(int(input('task number:')))
+
+test = ToDoApp()
+
+test.run()
+test.run()
+test.run()
+test.run()
+test.run()
+test.run()
+test.run()
+test.run()
+
+
+
+
+'''
 while True: 
     print_commands()
     command = int(input('give your command'))
     if command == 1:
         task = input('what is your task to add?')
         pass
-
-
 
 work_todo_list = ToDoListFunctions('My Work')
 work_todo_list.add_task('awdoijawd')
@@ -64,5 +91,6 @@ work_todo_list.mark_completed(1)
 work_todo_list.view_tasks()
 work_todo_list.remove_task(1)
 work_todo_list.view_tasks()
+'''
 
 
