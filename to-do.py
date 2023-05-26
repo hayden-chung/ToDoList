@@ -36,11 +36,17 @@ class ToDoListFunctions():
         print('=' * 15)
 
     def mark_completed(self, task_id):
-        try: 
-            task_id < len(self.items)
-        except IndexError:
-            print('this is invalid') 
-        self.items[task_id-1].completed = True
+        try:
+            task_id = int(task_id)
+            try: 
+                task_id < len(self.items)
+            except IndexError:
+                print('this is invalid') 
+
+        except ValueError:
+            print('value error')
+        
+
 
     def remove_task(self, task_id):
         self.items.pop(task_id-1)
@@ -55,12 +61,14 @@ class ToDoApp():
         cmd = input('enter your command (add, view, completed, remove)')
         if cmd == 'add':
             self.todolists.add_task(input('New task:'))
-        if cmd == 'view':
+        elif cmd == 'view':
             self.todolists.view_tasks()
-        if cmd == 'completed':
-            self.todolists.mark_completed(int(input('task number:')))
-        if cmd == 'remove':
-            self.todolists.remove_task(int(input('task number:')))
+        elif cmd == 'completed':
+            self.todolists.mark_completed(input('task number:'))
+        elif cmd == 'remove':
+            self.todolists.remove_task(input('task number:'))
+        else: 
+            print('invalid command')
 
 test = ToDoApp()
 
